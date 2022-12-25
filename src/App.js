@@ -1,14 +1,33 @@
-import { useState } from "react";
-import './assets/scss/app.scss';
-import Dashboard from "./pages/Dashboard";
+import './App.css'
+import "./assets/scss/app.scss"
+import Dashboard from "./pages/Dashboard"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import Header from "./components/Layout/Header"
+import Footer from "./components/Layout/Footer"
+import SideBarContainer from "./components/Layout/SideBarContainer"
+import Transactions from "./pages/Transactions";
 
 function App() {
-  const [count, setCount] = useState(0);
+  library.add(fas)
   return (
-    <>   
-    <Dashboard/>
+    <>
+      <Router>
+        <Header />
+        <SideBarContainer />
+        <div className="main-content">
+          <div className="page-content">
+            <Routes>
+              <Route path="/" element={<Dashboard />}/>
+              <Route path="/transactions" element={<Transactions />} />
+            </Routes>
+          </div>
+        </div>
+        <Footer />
+      </Router>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
